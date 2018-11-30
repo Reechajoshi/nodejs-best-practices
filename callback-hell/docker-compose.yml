@@ -1,19 +1,19 @@
 version: "3"
 services: 
-  app: 
+  cb_app: 
     build:
       context: .
       dockerfile: Dockerfile
     ports: 
-      - 49160:3000
+      - 49161:4000
     links:
-      - mongo
+      - cb_mongo
     volumes: 
       - .:/usr/src/app
     depends_on: 
-      - mongo
-  mongo:
-    container_name: mongo
+      - cb_mongo
+  cb_mongo:
+    container_name: cb_mongo
     image: mongo
     volumes: 
       - ./data:/data/db
