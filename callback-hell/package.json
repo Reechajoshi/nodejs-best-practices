@@ -1,0 +1,29 @@
+{
+  "name": "async-to-sync",
+  "version": "1.0.0",
+  "description": "remove callback from async calls",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reechajoshi/nodejs-best-practices.git"
+  },
+  "keywords": [
+    "async",
+    "sync",
+    "nodejs",
+    "bestpractice"
+  ],
+  "author": "Richa Joshi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Reechajoshi/nodejs-best-practices/issues"
+  },
+  "homepage": "https://github.com/Reechajoshi/nodejs-best-practices#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongo": "^0.1.0"
+  }
+}
