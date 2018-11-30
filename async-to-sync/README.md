@@ -1,4 +1,4 @@
-# Virtualize async call to synchronouse call
+# Virtualize async call to synchronous call
 
 Steps: 
 1) Declare a method which returns promise and resolved promise returns final value: eg:
