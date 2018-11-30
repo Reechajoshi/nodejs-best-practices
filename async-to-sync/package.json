@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Reechajoshi/nodejs-best-practices#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mongo": "^0.1.0"
   }
 }
