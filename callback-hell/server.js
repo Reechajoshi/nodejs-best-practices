@@ -2,6 +2,7 @@ let express = require("express");
 const request = require('request');
 
 let app = express();
+let finalMsg = "";
 
 app.listen(4000, () => console.log("app started"));
 
@@ -9,15 +10,13 @@ app.get("/", (req, res) => {
 	initCallbackHell().then(promiseRes => {
 		res.send("Callback Hell Res: " + promiseRes);
 	}).catch(err => {
-		console.log("ERROR HERE: ", err);
-		res.send(err);
+		res.send(err.message);
 	});
 })
 
 function initCallbackHell() {
-	// let finalMsg = "";
 	return new Promise((resolve, reject) => {
-		getPromise("http://demo3010395.mockable.io/getMessage").then((promise1Res) => {
+		resolve(getPromise("http://demo3010395.mockable.io/getMessage").then((promise1Res) => {
 			finalMsg += promise1Res;
 			return getPromise("http://demo3010395.mockable.io/getMessageNew");
 		}).then((promise2Res) => {
@@ -25,10 +24,10 @@ function initCallbackHell() {
 			return getPromise("http://demo3010395.mockable.io/setValue", true);
 		}).then((promise3Res) => {
 			finalMsg += promise3Res;
-			resolve(finalMsg);
+			return (finalMsg);
 		}).catch(err => {
-			throw "ERROR";
-		});
+			throw new Error(err);
+		}));
 	});
 }
 
@@ -36,10 +35,12 @@ function getPromise(url, isPost) {
 	return new Promise((resolve, reject) => {
 		if (isPost) {
 			request.post(url, (err, resp, body) => {
+				if (err) reject(err);
 				resolve(body);
 			});	
 		} else {
 			request.get(url, (err, resp, body) => {
+				if (err) reject(err);
 				resolve(body);
 			});
 		}
