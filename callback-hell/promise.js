@@ -8,26 +8,18 @@ app.listen(4000, () => console.log("app started"));
 app.get("/", (req, res) => {
 	initCallbackHell().then(promiseRes => {
 		res.send("Callback Hell Res: " + promiseRes);
-	}).catch(err => {
-		console.log("ERROR HERE: ", err);
-		res.send(err);
 	});
 })
 
 function initCallbackHell() {
-	// let finalMsg = "";
-	return new Promise((resolve, reject) => {
-		getPromise("http://demo3010395.mockable.io/getMessage").then((promise1Res) => {
-			finalMsg += promise1Res;
-			return getPromise("http://demo3010395.mockable.io/getMessageNew");
-		}).then((promise2Res) => {
+	let finalMsg = "";
+	return getPromise("http://demo3010395.mockable.io/getMessage").then((promise1Res) => {
+		finalMsg += promise1Res;
+		getPromise("http://demo3010395.mockable.io/getMessageNew").then((promise2Res) => {
 			finalMsg += promise2Res;
-			return getPromise("http://demo3010395.mockable.io/setValue", true);
-		}).then((promise3Res) => {
-			finalMsg += promise3Res;
-			resolve(finalMsg);
-		}).catch(err => {
-			throw "ERROR";
+			getPromise("http://demo3010395.mockable.io/setValue", true).then((promise3Res) => {
+				finalMsg += promise3Res;
+			});
 		});
 	});
 }
