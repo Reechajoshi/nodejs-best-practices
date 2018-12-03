@@ -2,6 +2,7 @@ let express = require("express");
 const request = require('request');
 
 let app = express();
+let finalMsg = "";
 
 app.listen(4000, () => console.log("app started"));
 
@@ -12,7 +13,6 @@ app.get("/", (req, res) => {
 })
 
 function initCallbackHell() {
-	let finalMsg = "";
 	return getPromise("http://demo3010395.mockable.io/getMessage").then((promise1Res) => {
 		finalMsg += promise1Res;
 		getPromise("http://demo3010395.mockable.io/getMessageNew").then((promise2Res) => {
